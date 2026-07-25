@@ -15,7 +15,7 @@ every answer cites the source document and chunk it came from.
                           FastAPI Backend
              ┌───────────────────┼───────────────────┐
              │                   │                    │
-        PostgreSQL           ChromaDB             Ollama API
+        PostgreSQL           ChromaDB             Ollama
      (users, docs,        (chunk embeddings)    (embeddings + chat)
       chat history)
              │
@@ -26,7 +26,7 @@ every answer cites the source document and chunk it came from.
 `PDF/DOCX/MD → extract text → chunk (sliding window, overlap) → embed (Ollama) → store in ChromaDB + Postgres metadata`
 
 **RAG pipeline (on question):**
-`Question → embed → vector search (top-k, scoped to user) → build prompt with retrieved chunks → GPT answer → return answer + citations`
+`Question → embed → vector search (top-k, scoped to user) → build prompt with retrieved chunks → mistral answer → return answer + citations`
 
 ## Tech stack
 
@@ -36,8 +36,8 @@ every answer cites the source document and chunk it came from.
 | Backend    | FastAPI, SQLAlchemy                       |
 | Database   | PostgreSQL (SQLite for local dev, zero setup) |
 | Vector DB  | ChromaDB (persistent, local)              |
-| Embeddings | Ollama `text-embedding-3-small`           |
-| LLM        | Ollama `gpt-4o-mini` (configurable)       |
+| Embeddings | Ollama `mistral`           |
+| LLM        | Ollama                                    |
 | Auth       | JWT (python-jose) + bcrypt password hashing |
 
 ## Project structure
