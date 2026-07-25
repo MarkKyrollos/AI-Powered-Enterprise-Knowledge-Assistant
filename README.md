@@ -73,7 +73,7 @@ enterprise-knowledge-assistant/
 
 ## Getting started
 
-### Option A — Docker Compose (recommended)
+### Option A — Docker Compose
 
 Requires Docker and an Ollama API key.
 
@@ -93,7 +93,7 @@ docker compose up --build
 
 ### Option B — Run locally without Docker
 
-**Backend** (uses SQLite automatically, no Postgres needed):
+**Backend** (uses SQLite automatically):
 
 ```bash
 cd backend
