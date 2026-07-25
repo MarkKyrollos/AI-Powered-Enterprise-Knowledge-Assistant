@@ -15,7 +15,7 @@ every answer cites the source document and chunk it came from.
                           FastAPI Backend
              ┌───────────────────┼───────────────────┐
              │                   │                    │
-        PostgreSQL           ChromaDB             OpenAI API
+        PostgreSQL           ChromaDB             Ollama API
      (users, docs,        (chunk embeddings)    (embeddings + chat)
       chat history)
              │
@@ -23,7 +23,7 @@ every answer cites the source document and chunk it came from.
 ```
 
 **RAG pipeline (on upload):**
-`PDF/DOCX/MD → extract text → chunk (sliding window, overlap) → embed (OpenAI) → store in ChromaDB + Postgres metadata`
+`PDF/DOCX/MD → extract text → chunk (sliding window, overlap) → embed (Ollama) → store in ChromaDB + Postgres metadata`
 
 **RAG pipeline (on question):**
 `Question → embed → vector search (top-k, scoped to user) → build prompt with retrieved chunks → GPT answer → return answer + citations`
@@ -36,8 +36,8 @@ every answer cites the source document and chunk it came from.
 | Backend    | FastAPI, SQLAlchemy                       |
 | Database   | PostgreSQL (SQLite for local dev, zero setup) |
 | Vector DB  | ChromaDB (persistent, local)              |
-| Embeddings | OpenAI `text-embedding-3-small`           |
-| LLM        | OpenAI `gpt-4o-mini` (configurable)       |
+| Embeddings | Ollama `text-embedding-3-small`           |
+| LLM        | Ollama `gpt-4o-mini` (configurable)       |
 | Auth       | JWT (python-jose) + bcrypt password hashing |
 
 ## Project structure
@@ -75,7 +75,7 @@ enterprise-knowledge-assistant/
 
 ### Option A — Docker Compose (recommended)
 
-Requires Docker and an OpenAI API key.
+Requires Docker and an Ollama API key.
 
 ```bash
 git clone <your-repo-url>
