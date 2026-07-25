@@ -1,6 +1,6 @@
 # Enterprise Knowledge Assistant (RAG)
 
-An AI assistant that lets employees upload company documents (PDF, DOCX, Markdown, TXT)
+An AI chatbot assistant that lets employees upload company documents (PDF, DOCX, Markdown, TXT)
 and ask natural-language questions. Answers are grounded only in the uploaded content and
 every answer cites the source document and chunk it came from.
 
