@@ -35,7 +35,6 @@ every answer cites the source document and chunk it came from.
 | Frontend   | React, Vite, Tailwind CSS, React Router       |
 | Backend    | FastAPI, SQLAlchemy                           |
 | Database   | PostgreSQL (SQLite for local dev, zero setup) |
-<<<<<<< HEAD
 | Vector DB  | ChromaDB (persistent, local)              |
 | Embeddings | Ollama `mistral`                          |
 | LLM        | Ollama                                    |
