@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app import models, schemas, auth
@@ -21,11 +21,19 @@ def chat(
     db.add(user_msg)
     db.commit()
 
-    result = answer_question(
-        owner_id=current_user.id,
-        question=payload.question,
-        document_ids=payload.document_ids,
-    )
+    try:
+        result = answer_question(
+            owner_id=current_user.id,
+            question=payload.question,
+            document_ids=payload.document_ids,
+        )
+    except Exception as e:
+        error_detail = str(e)
+        if "API key" in error_detail or "401" in error_detail:
+            detail = "OpenAI API key is not configured. Please configure OPENAI_API_KEY in .env file."
+        else:
+            detail = f"Error answering question: {error_detail}"
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=detail)
 
     assistant_msg = models.ChatMessage(
         owner_id=current_user.id,

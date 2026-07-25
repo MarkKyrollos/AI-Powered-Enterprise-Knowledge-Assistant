@@ -10,7 +10,10 @@ from app.rag.embeddings import embed_texts, embed_query
 from app.vector_db import chroma_client
 from app import models
 
-_client = OpenAI(api_key=settings.openai_api_key)
+_client = OpenAI(
+    api_key=settings.openai_api_key,
+    base_url=settings.openai_base_url
+)
 
 SYSTEM_PROMPT = (
     "You are an enterprise knowledge assistant. Answer the user's question using ONLY "
@@ -62,7 +65,7 @@ def answer_question(
 
     if not hits:
         return {
-            "answer": "I couldn't find any relevant information in your uploaded documents.",
+            "answer": "No documents uploaded yet. Please upload documents first before asking questions. Go to the Documents page to upload files.",
             "citations": [],
         }
 
