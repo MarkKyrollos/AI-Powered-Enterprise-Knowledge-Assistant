@@ -10,10 +10,11 @@ from app.rag.embeddings import embed_texts, embed_query
 from app.vector_db import chroma_client
 from app import models
 
-_client = OpenAI(
-    api_key=settings.openai_api_key,
-    base_url=settings.openai_base_url
-)
+_client_kwargs = {"base_url": settings.openai_base_url}
+if settings.openai_api_key:
+    _client_kwargs["api_key"] = settings.openai_api_key
+
+_client = OpenAI(**_client_kwargs)
 
 SYSTEM_PROMPT = (
     "You are an enterprise knowledge assistant. Answer the user's question using ONLY "
