@@ -23,7 +23,12 @@ SYSTEM_PROMPT = (
     "and factual. Do not make up information that isn't in the excerpts."
 )
 
-
+'''
+ingest_document() :
+When a document is uploaded:
+Extracts its text -> Splits the text into chunks -> Creates embeddings for the chunks -> Stores them in ChromaDB
+then marks the document as ready or failed.
+'''
 def ingest_document(db: Session, document: models.Document, owner_id: int):
     """Extract, chunk, embed, and store a document's content. Updates document status."""
     try:
@@ -56,6 +61,11 @@ def ingest_document(db: Session, document: models.Document, owner_id: int):
         raise
 
 
+
+'''
+answer_question() :
+When the user asks a question:
+Converts question into embedding -> Searches ChromaDB for similar chunks -> Sends those chunks and the question to the LLM ->Returns the answer and citations.'''
 def answer_question(
     owner_id: int, question: str, document_ids: Optional[List[int]] = None, top_k: int = 5
 ):

@@ -16,7 +16,7 @@ def embed_texts(texts: List[str]) -> List[List[float]]:
     if not texts:
         return []
     response = _client.embeddings.create(model=settings.embedding_model, input=texts)
-    return [item.embedding for item in response.data]
+    return [item.embedding for item in response.data] #this line extracts the embedding vectors from the response and returns them as a list of lists, where each inner list corresponds to the embedding of a text in the input list.
 
 
 def embed_query(text: str) -> List[float]:
