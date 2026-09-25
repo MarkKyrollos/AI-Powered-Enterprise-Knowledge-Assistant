@@ -14,7 +14,7 @@ every answer cites the source document and chunk it came from.
                                  │
                           FastAPI Backend
              ┌───────────────────┼───────────────────┐
-             │                   │                    │
+             │                   │                   │
         PostgreSQL           ChromaDB             Ollama
      (users, docs,        (chunk embeddings)    (embeddings + chat)
       chat history)
