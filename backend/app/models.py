@@ -14,6 +14,7 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
+    #this relationship allows us to access the documents and messages associated with a user. The cascade option ensures that when a user is deleted, all their documents and messages are also deleted.
     documents = relationship("Document", back_populates="owner", cascade="all, delete-orphan")
     messages = relationship("ChatMessage", back_populates="owner", cascade="all, delete-orphan")
 

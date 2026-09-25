@@ -5,10 +5,10 @@ from app.config import settings
 
 connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
 
-engine = create_engine(settings.database_url, connect_args=connect_args)
+engine = create_engine(settings.database_url, connect_args=connect_args) # engine is the starting point for any SQLAlchemy application, it manages connections to the database
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base()
+Base = declarative_base() # base: class for all models
 
 
 def get_db():
